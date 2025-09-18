@@ -1,0 +1,52 @@
+If you want to test your application on a Kubernetes (K8s) cluster in the cloud, it can be a bit expensive. Instead, you can run your application on a local Kubernetes cluster using Minikube.
+install docker desktop on windows
+command prompt-->docker version
+GO-->>https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download
+minikube
+**********************************************************************************************
+Manually Start Docker Desktop
+minikube delete
+minikube start --driver=docker
+kubectl get nodes
+git clone https://github.com/iemafzalhassan/full-stack_chatApp.git
+********************************************************************************************
+********************************************************************************************
+docker hub->>account settings-->>Personal Access Token-->>generating a new Token--->>k8s-local/30d/read write dlt-->>Generate
+cd full-stack_chatApp----->>>>docker login,password
+docker login -u ankitchakrabarty
+docker build -t ankitchakrabarty/chatapp-backend:latest .
+docker images
+docker push ankitchakrabarty/chatapp-backend:latest
+docker build -t ankitchakrabarty/chatapp-frontend:latest .
+we can get the MongoDB image directly from Docker Hub 
+https://hub.docker.com/repositories/ankitchakrabarty---we can see
+namespace.yml
+kubectl create -f namespace.yml
+kubectl get ns
+backend-deployment.yml
+frontend-deployment.yml
+mongodb-deployment.yml
+mongodb-pv.yml
+mongodb-pvc.yml
+frontend-service.yml
+backend-service.yml
+kubectl apply -f backend-deployment.yml
+kubectl apply -f mongodb-deployment.yml
+kubectl apply -f mongodb-pv.yml
+kubectl apply -f mongodb-pvc.yml
+kubectl apply -f backend-service.yml
+kubectl apply -f frontend-deployment.yml
+kubectl apply -f frontend-service.yml
+ kubectl apply -f mongodb-service.yml 
+ kubectl apply -f secrets.yml   
+kubectl get pods -n chat-app
+kubectl get svc -n chat-app
+kubectl port-forward service/backend -n chat-app 5001:5001
+ kubectl port-forward service/frontend -n chat-app 80:80
+ http://localhost:5001/
+ Start-Process powershell -ArgumentList "kubectl port-forward service/chatapp-backend-service -n chatapp 5001:5001"
+Start-Process powershell -ArgumentList "kubectl port-forward service/chatapp-frontend-service -n chatapp 80:80"
+http://localhost/
+minikube addons enable ingress
+*****************************************************************************************************************************************************************
+*****************************************************************************************************************************************************************
